@@ -1,7 +1,7 @@
 package com.step.bootcamp.matrix;
 
-public class MatrixException extends Exception {
-    public MatrixException(String message) {
+class MatrixException extends Exception {
+    MatrixException(String message) {
         super(message);
     }
 }

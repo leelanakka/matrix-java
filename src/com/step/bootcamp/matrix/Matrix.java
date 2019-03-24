@@ -56,10 +56,7 @@ class Matrix {
         int noOfRows = otherMatrix.matrix.size();
         int noOfColumns = otherMatrix.matrix.get(0).size();
         int totalElements = noOfRows + noOfColumns;
-        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < noOfRows; i++) {
-            result.add(new ArrayList<>());
-        }
+        ArrayList<ArrayList<Integer>> result = getArrayLists(noOfRows);
 
         for (int i = 0; i < totalElements; i++) {
             Integer elementInMainMatrix = this.matrix.get(i / noOfRows).get(i % noOfRows);
@@ -74,10 +71,7 @@ class Matrix {
         int noOfRows = otherMatrix.matrix.size();
         int noOfColumns = otherMatrix.matrix.get(0).size();
         int totalElements = noOfRows + noOfColumns;
-        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < noOfRows; i++) {
-            result.add(new ArrayList<>());
-        }
+        ArrayList<ArrayList<Integer>> result = getArrayLists(noOfRows);
 
         for (int i = 0; i < totalElements; i++) {
             Integer first = this.matrix.get(i / noOfRows).get(i % noOfRows);
@@ -85,5 +79,13 @@ class Matrix {
             result.get(i / noOfRows).add(first - second);
         }
         return validateInputMatrix(result);
+    }
+
+    private ArrayList<ArrayList<Integer>> getArrayLists(int noOfRows) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < noOfRows; i++) {
+            result.add(new ArrayList<>());
+        }
+        return result;
     }
 }
