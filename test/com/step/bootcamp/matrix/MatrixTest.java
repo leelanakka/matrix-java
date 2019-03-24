@@ -87,10 +87,10 @@ class MatrixTest {
 
         Matrix matrix = new Matrix(input);
 
-        ArrayList<ArrayList<Integer>> anotherMatrix = new ArrayList<>();
-        anotherMatrix.add(new ArrayList<>(asList(1, 3)));
-        anotherMatrix.add(new ArrayList<>(asList(2, 4)));
-        Matrix subtractable = new Matrix(anotherMatrix);
+        ArrayList<ArrayList<Integer>> anotherList = new ArrayList<>();
+        anotherList.add(new ArrayList<>(asList(1, 3)));
+        anotherList.add(new ArrayList<>(asList(2, 4)));
+        Matrix anotherMatrix = new Matrix(anotherList);
 
         ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
         expected.add(new ArrayList<>(asList(3, 6)));
@@ -98,7 +98,7 @@ class MatrixTest {
 
         Matrix expectedOutput = new Matrix(expected);
 
-        assertEquals(expectedOutput, matrix.subtract(subtractable));
+        assertEquals(expectedOutput, matrix.subtract(anotherMatrix));
     }
 
 }
