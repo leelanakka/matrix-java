@@ -6,11 +6,30 @@ class Matrix {
 
     private final ArrayList<ArrayList<Integer>> matrix;
 
-    Matrix(ArrayList<ArrayList<Integer>> inputMatrix) {
+    private Matrix(ArrayList<ArrayList<Integer>> inputMatrix) {
         this.matrix = inputMatrix;
     }
 
-    Matrix transpose() {
+    static Matrix validateInputMatrix(ArrayList<ArrayList<Integer>> inputMatrix) throws MatrixException {
+        int noOfColumns = inputMatrix.get(0).size();
+        for (ArrayList<Integer> integers : inputMatrix) {
+            if (noOfColumns != integers.size()) {
+                throw new MatrixException("Invalid matrix");
+            }
+        }
+        return new Matrix(inputMatrix);
+    }
+
+    private void validateMatrixForAdditionAndSubtraction(Matrix matrix) throws MatrixException {
+        boolean isRowsEqual = matrix.matrix.size() == this.matrix.size();
+        boolean isColumnsEqual = matrix.matrix.get(0).size() == this.matrix.get(0).size();
+        if (isRowsEqual && isColumnsEqual) {
+            return;
+        }
+        throw new MatrixException("invalid matrix size to add with existing size");
+    }
+
+    Matrix transpose() throws MatrixException {
         ArrayList<ArrayList<Integer>> resultMatrix = new ArrayList<>();
         int noOfColumns = this.matrix.get(0).size();
         for (int columnIndex = 0; columnIndex < noOfColumns; columnIndex++) {
@@ -21,7 +40,7 @@ class Matrix {
             }
             resultMatrix.add(newRow);
         }
-        return new Matrix(resultMatrix);
+        return validateInputMatrix(resultMatrix);
     }
 
     @Override
@@ -32,7 +51,8 @@ class Matrix {
         return this.matrix.equals(matrix.matrix);
     }
 
-    Matrix add(Matrix otherMatrix) {
+    Matrix add(Matrix otherMatrix) throws MatrixException {
+        validateMatrixForAdditionAndSubtraction(otherMatrix);
         int noOfRows = otherMatrix.matrix.size();
         int noOfColumns = otherMatrix.matrix.get(0).size();
         int totalElements = noOfRows + noOfColumns;
@@ -46,12 +66,13 @@ class Matrix {
             Integer elementInOtherMatrix = otherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
             result.get(i / noOfRows).add(elementInMainMatrix + elementInOtherMatrix);
         }
-        return new Matrix(result);
+        return validateInputMatrix(result);
     }
 
-    Matrix subtract(Matrix anotherMatrix) {
-        int noOfRows = anotherMatrix.matrix.size();
-        int noOfColumns = anotherMatrix.matrix.get(0).size();
+    Matrix subtract(Matrix otherMatrix) throws MatrixException {
+        validateMatrixForAdditionAndSubtraction(otherMatrix);
+        int noOfRows = otherMatrix.matrix.size();
+        int noOfColumns = otherMatrix.matrix.get(0).size();
         int totalElements = noOfRows + noOfColumns;
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
         for (int i = 0; i < noOfRows; i++) {
@@ -60,9 +81,9 @@ class Matrix {
 
         for (int i = 0; i < totalElements; i++) {
             Integer first = this.matrix.get(i / noOfRows).get(i % noOfRows);
-            Integer second = anotherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
+            Integer second = otherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
             result.get(i / noOfRows).add(first - second);
         }
-        return new Matrix(result);
+        return validateInputMatrix(result);
     }
 }

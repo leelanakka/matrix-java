@@ -9,94 +9,94 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MatrixTest {
     @Test
-    void shouldReturnTheTransposeOfAnMatrix() {
+    void shouldReturnTheTransposeOfAnMatrix() throws MatrixException {
         ArrayList<ArrayList<Integer>> input = new ArrayList<>();
         input.add(new ArrayList<>(asList(1, 2)));
         input.add(new ArrayList<>(asList(3, 4)));
 
-        Matrix matrix = new Matrix(input);
+        Matrix matrix = Matrix.validateInputMatrix(input);
 
         ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
         expected.add(new ArrayList<>(asList(1, 3)));
         expected.add(new ArrayList<>(asList(2, 4)));
-        Matrix expectedOutput = new Matrix(expected);
+        Matrix expectedOutput = Matrix.validateInputMatrix(expected);
         assertEquals(expectedOutput, matrix.transpose());
     }
 
     @Test
-    void shouldReturnTheTransposeOfAnMatrixForThreeByThreeMatrix() {
+    void shouldReturnTheTransposeOfAnMatrixForThreeByThreeMatrix() throws MatrixException {
         ArrayList<ArrayList<Integer>> input = new ArrayList<>();
         input.add(new ArrayList<>(asList(1, 2, 5)));
         input.add(new ArrayList<>(asList(3, 4, 6)));
 
-        Matrix matrix = new Matrix(input);
+        Matrix matrix = Matrix.validateInputMatrix(input);
 
         ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
         expected.add(new ArrayList<>(asList(1, 3)));
         expected.add(new ArrayList<>(asList(2, 4)));
         expected.add(new ArrayList<>(asList(5, 6)));
 
-        Matrix expectedOutput = new Matrix(expected);
+        Matrix expectedOutput = Matrix.validateInputMatrix(expected);
         assertEquals(expectedOutput, matrix.transpose());
     }
 
     @Test
-    void shouldReturnTheTransposeOfAnMatrixForOneByTwoSize() {
+    void shouldReturnTheTransposeOfAnMatrixForOneByTwoSize() throws MatrixException {
         ArrayList<ArrayList<Integer>> input = new ArrayList<>();
         input.add(new ArrayList<>(asList(1)));
         input.add(new ArrayList<>(asList(3)));
 
-        Matrix matrix = new Matrix(input);
+        Matrix matrix = Matrix.validateInputMatrix(input);
 
         ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
         expected.add(new ArrayList<>(asList(1, 3)));
 
-        Matrix expectedOutput = new Matrix(expected);
+        Matrix expectedOutput = Matrix.validateInputMatrix(expected);
         assertEquals(expectedOutput, matrix.transpose());
     }
 
 
     @Test
-    void shouldAddTheTwoMatrixAndReturnTheSumOfMatrix() {
+    void shouldAddTheTwoMatrixAndReturnTheSumOfMatrix() throws MatrixException {
         ArrayList<ArrayList<Integer>> input = new ArrayList<>();
         input.add(new ArrayList<>(asList(1, 2)));
         input.add(new ArrayList<>(asList(3, 4)));
 
-        Matrix matrix = new Matrix(input);
+        Matrix matrix = Matrix.validateInputMatrix(input);
 
         ArrayList<ArrayList<Integer>> anotherMatrix = new ArrayList<>();
         anotherMatrix.add(new ArrayList<>(asList(1, 3)));
         anotherMatrix.add(new ArrayList<>(asList(2, 4)));
-        Matrix addableMatrix = new Matrix(anotherMatrix);
+        Matrix addableMatrix = Matrix.validateInputMatrix(anotherMatrix);
 
 
         ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
         expected.add(new ArrayList<>(asList(2, 5)));
         expected.add(new ArrayList<>(asList(5, 8)));
 
-        Matrix expectedOutput = new Matrix(expected);
+        Matrix expectedOutput = Matrix.validateInputMatrix(expected);
 
         assertEquals(expectedOutput, matrix.add(addableMatrix));
     }
 
     @Test
-    void shouldSubtractTheGivenMatrices() {
+    void shouldSubtractTheGivenMatrices() throws MatrixException {
         ArrayList<ArrayList<Integer>> input = new ArrayList<>();
         input.add(new ArrayList<>(asList(4, 9)));
         input.add(new ArrayList<>(asList(10, 6)));
 
-        Matrix matrix = new Matrix(input);
+        Matrix matrix = Matrix.validateInputMatrix(input);
 
         ArrayList<ArrayList<Integer>> anotherList = new ArrayList<>();
         anotherList.add(new ArrayList<>(asList(1, 3)));
         anotherList.add(new ArrayList<>(asList(2, 4)));
-        Matrix anotherMatrix = new Matrix(anotherList);
+        Matrix anotherMatrix = Matrix.validateInputMatrix(anotherList);
 
         ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
         expected.add(new ArrayList<>(asList(3, 6)));
         expected.add(new ArrayList<>(asList(8, 2)));
 
-        Matrix expectedOutput = new Matrix(expected);
+        Matrix expectedOutput = Matrix.validateInputMatrix(expected);
 
         assertEquals(expectedOutput, matrix.subtract(anotherMatrix));
     }
