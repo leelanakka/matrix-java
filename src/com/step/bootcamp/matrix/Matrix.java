@@ -5,18 +5,18 @@ import java.util.Objects;
 
 class Matrix {
 
-    private final ArrayList<ArrayList<Integer>> inputMatrix;
+    private final ArrayList<ArrayList<Integer>> matrix;
 
     Matrix(ArrayList<ArrayList<Integer>> inputMatrix) {
-        this.inputMatrix = inputMatrix;
+        this.matrix = inputMatrix;
     }
 
     Matrix transpose() {
         ArrayList<ArrayList<Integer>> resultMatrix = new ArrayList<>();
-        int noOfColumns = this.inputMatrix.get(0).size();
+        int noOfColumns = this.matrix.get(0).size();
         for (int columnIndex = 0; columnIndex < noOfColumns; columnIndex++) {
             ArrayList<Integer> newRow = new ArrayList<>();
-            for (ArrayList<Integer> inputMatrix1 : this.inputMatrix) {
+            for (ArrayList<Integer> inputMatrix1 : this.matrix) {
                 Integer element = inputMatrix1.get(columnIndex);
                 newRow.add(element);
             }
@@ -30,27 +30,44 @@ class Matrix {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Matrix matrix = (Matrix) o;
-        return inputMatrix.equals(matrix.inputMatrix);
+        return this.matrix.equals(matrix.matrix);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(inputMatrix);
+        return Objects.hash(matrix);
     }
 
-    public Matrix add(ArrayList<ArrayList<Integer>> addable) {
-        int noOfRows = addable.size();
-        int noOfColumns = addable.get(0).size();
+    Matrix add(Matrix anotherMatrix) {
+        int noOfRows = anotherMatrix.matrix.size();
+        int noOfColumns = anotherMatrix.matrix.get(0).size();
         int totalElements = noOfRows + noOfColumns;
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
         for (int i = 0; i < noOfRows; i++) {
-            result.add(new ArrayList<Integer>());
+            result.add(new ArrayList<>());
         }
-        
+
         for (int i = 0; i < totalElements; i++) {
-            Integer first = this.inputMatrix.get(i / noOfRows).get(i % noOfRows);
-            Integer second = addable.get(i / noOfRows).get(i % noOfRows);
+            Integer first = this.matrix.get(i / noOfRows).get(i % noOfRows);
+            Integer second = anotherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
             result.get(i / noOfRows).add(first + second);
+        }
+        return new Matrix(result);
+    }
+
+    Matrix subtract(Matrix anotherMatrix) {
+        int noOfRows = anotherMatrix.matrix.size();
+        int noOfColumns = anotherMatrix.matrix.get(0).size();
+        int totalElements = noOfRows + noOfColumns;
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < noOfRows; i++) {
+            result.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < totalElements; i++) {
+            Integer first = this.matrix.get(i / noOfRows).get(i % noOfRows);
+            Integer second = anotherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
+            result.get(i / noOfRows).add(first - second);
         }
         return new Matrix(result);
     }

@@ -64,10 +64,10 @@ class MatrixTest {
 
         Matrix matrix = new Matrix(input);
 
-        ArrayList<ArrayList<Integer>> addable = new ArrayList<>();
-        addable.add(new ArrayList<>(asList(1, 3)));
-        addable.add(new ArrayList<>(asList(2, 4)));
-        Matrix addableMatrix = new Matrix(addable);
+        ArrayList<ArrayList<Integer>> anotherMatrix = new ArrayList<>();
+        anotherMatrix.add(new ArrayList<>(asList(1, 3)));
+        anotherMatrix.add(new ArrayList<>(asList(2, 4)));
+        Matrix addableMatrix = new Matrix(anotherMatrix);
 
 
         ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
@@ -76,6 +76,29 @@ class MatrixTest {
 
         Matrix expectedOutput = new Matrix(expected);
 
-        assertEquals(expectedOutput, matrix.add(addable));
+        assertEquals(expectedOutput, matrix.add(addableMatrix));
     }
+
+    @Test
+    void shouldSubtractTheGivenMatrices() {
+        ArrayList<ArrayList<Integer>> input = new ArrayList<>();
+        input.add(new ArrayList<>(asList(4, 9)));
+        input.add(new ArrayList<>(asList(10, 6)));
+
+        Matrix matrix = new Matrix(input);
+
+        ArrayList<ArrayList<Integer>> anotherMatrix = new ArrayList<>();
+        anotherMatrix.add(new ArrayList<>(asList(1, 3)));
+        anotherMatrix.add(new ArrayList<>(asList(2, 4)));
+        Matrix subtractable = new Matrix(anotherMatrix);
+
+        ArrayList<ArrayList<Integer>> expected = new ArrayList<>();
+        expected.add(new ArrayList<>(asList(3, 6)));
+        expected.add(new ArrayList<>(asList(8, 2)));
+
+        Matrix expectedOutput = new Matrix(expected);
+
+        assertEquals(expectedOutput, matrix.subtract(subtractable));
+    }
+
 }
