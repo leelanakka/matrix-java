@@ -32,12 +32,7 @@ class Matrix {
         Matrix matrix = (Matrix) o;
         return this.matrix.equals(matrix.matrix);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(matrix);
-    }
-
+    
     Matrix add(Matrix anotherMatrix) {
         int noOfRows = anotherMatrix.matrix.size();
         int noOfColumns = anotherMatrix.matrix.get(0).size();
