@@ -1,7 +1,6 @@
 package com.step.bootcamp.matrix;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 class Matrix {
 
@@ -32,10 +31,10 @@ class Matrix {
         Matrix matrix = (Matrix) o;
         return this.matrix.equals(matrix.matrix);
     }
-    
-    Matrix add(Matrix anotherMatrix) {
-        int noOfRows = anotherMatrix.matrix.size();
-        int noOfColumns = anotherMatrix.matrix.get(0).size();
+
+    Matrix add(Matrix otherMatrix) {
+        int noOfRows = otherMatrix.matrix.size();
+        int noOfColumns = otherMatrix.matrix.get(0).size();
         int totalElements = noOfRows + noOfColumns;
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
         for (int i = 0; i < noOfRows; i++) {
@@ -43,9 +42,9 @@ class Matrix {
         }
 
         for (int i = 0; i < totalElements; i++) {
-            Integer first = this.matrix.get(i / noOfRows).get(i % noOfRows);
-            Integer second = anotherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
-            result.get(i / noOfRows).add(first + second);
+            Integer elementInMainMatrix = this.matrix.get(i / noOfRows).get(i % noOfRows);
+            Integer elementInOtherMatrix = otherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
+            result.get(i / noOfRows).add(elementInMainMatrix + elementInOtherMatrix);
         }
         return new Matrix(result);
     }
