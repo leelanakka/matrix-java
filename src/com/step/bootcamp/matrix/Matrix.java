@@ -37,4 +37,21 @@ class Matrix {
     public int hashCode() {
         return Objects.hash(inputMatrix);
     }
+
+    public Matrix add(ArrayList<ArrayList<Integer>> addable) {
+        int noOfRows = addable.size();
+        int noOfColumns = addable.get(0).size();
+        int totalElements = noOfRows + noOfColumns;
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < noOfRows; i++) {
+            result.add(new ArrayList<Integer>());
+        }
+        
+        for (int i = 0; i < totalElements; i++) {
+            Integer first = this.inputMatrix.get(i / noOfRows).get(i % noOfRows);
+            Integer second = addable.get(i / noOfRows).get(i % noOfRows);
+            result.get(i / noOfRows).add(first + second);
+        }
+        return new Matrix(result);
+    }
 }
