@@ -56,14 +56,16 @@ class Matrix {
         int noOfRows = otherMatrix.matrix.size();
         int noOfColumns = otherMatrix.matrix.get(0).size();
         int totalElements = noOfRows + noOfColumns;
-        ArrayList<ArrayList<Integer>> result = getArrayLists(noOfRows);
+        ArrayList<ArrayList<Integer>> addedMatrix = getArrayLists(noOfRows);
 
-        for (int i = 0; i < totalElements; i++) {
-            Integer elementInMainMatrix = this.matrix.get(i / noOfRows).get(i % noOfRows);
-            Integer elementInOtherMatrix = otherMatrix.matrix.get(i / noOfRows).get(i % noOfRows);
-            result.get(i / noOfRows).add(elementInMainMatrix + elementInOtherMatrix);
+        for (int index = 0; index < totalElements; index++) {
+            int noOfElementInRow = index / noOfRows;
+            int noOfColumn = index % noOfRows;
+            Integer elementInMainMatrix = this.matrix.get(noOfElementInRow).get(noOfColumn);
+            Integer elementInOtherMatrix = otherMatrix.matrix.get(noOfElementInRow).get(noOfColumn);
+            addedMatrix.get(noOfElementInRow).add(elementInMainMatrix + elementInOtherMatrix);
         }
-        return validateInputMatrix(result);
+        return validateInputMatrix(addedMatrix);
     }
 
     Matrix subtract(Matrix otherMatrix) throws MatrixException {

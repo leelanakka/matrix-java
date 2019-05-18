@@ -134,4 +134,9 @@ class MatrixTest {
         assertEquals(expectedOutput, matrix.subtract(anotherMatrix));
     }
 
+
+    @Test
+    void shouldMultiplyTheMatrixByGivenValidMatrix() {
+
+    }
 }
